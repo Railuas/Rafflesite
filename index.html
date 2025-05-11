@@ -663,6 +663,41 @@
             cursor: pointer;
         }
         
+        .email-subscribe {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .email-subscribe input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        
+        .email-subscribe button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        
+        .coupon-reveal {
+            display: none;
+            background-color: var(--success);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -718,6 +753,10 @@
             
             nav.active {
                 display: block;
+            }
+            
+            .email-subscribe input {
+                width: 60%;
             }
         }
     </style>
@@ -886,8 +925,17 @@
                 <p>Get your tickets for this week's draw before time runs out!</p>
             </div>
             <div class="raffle-form">
-                <div class="double-chance">
-                    🎉 SPECIAL OFFER: Use coupon code "LUCKY2X" to DOUBLE your winning chance! 🎉
+                <div id="double-chance-offer" class="double-chance">
+                    🎉 SPECIAL OFFER: Subscribe to get DOUBLE winning chance! 🎉
+                </div>
+                
+                <div class="email-subscribe">
+                    <input type="email" id="subscribe-email" placeholder="Enter your email for double chance">
+                    <button id="subscribe-btn">Subscribe</button>
+                </div>
+                
+                <div id="coupon-reveal" class="coupon-reveal">
+                    Your DOUBLE CHANCE code: <strong>LUCKY2X</strong>
                 </div>
                 
                 <div class="form-group">
@@ -906,8 +954,8 @@
                 </div>
                 
                 <div class="coupon-input">
-                    <input type="text" placeholder="Enter coupon code">
-                    <button>APPLY</button>
+                    <input type="text" id="coupon-code" placeholder="Enter coupon code">
+                    <button id="apply-coupon">APPLY</button>
                 </div>
                 
                 <div class="ticket-counter">
@@ -939,7 +987,13 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary btn-lg" style="width: 100%;">
+                <form id="paxum-form" action="https://www.paxum.com/payment/phrame.php" method="post" style="display: none;">
+                    <input type="hidden" name="email" value="calebspammer@gmail.com">
+                    <input type="hidden" name="amount" id="paxum-amount" value="10">
+                    <input type="hidden" name="item_name" value="Raffle Ticket">
+                </form>
+                
+                <button id="payment-btn" class="btn btn-primary btn-lg" style="width: 100%;">
                     PAY $10 & ENTER DRAW <i class="fas fa-arrow-right"></i>
                 </button>
                 
@@ -1188,6 +1242,38 @@
                     document.getElementById('mainNav').classList.remove('active');
                 }
             });
+        });
+        
+        // Email subscription for double chance
+        document.getElementById('subscribe-btn').addEventListener('click', function() {
+            const email = document.getElementById('subscribe-email').value;
+            if (email && email.includes('@')) {
+                document.getElementById('coupon-reveal').style.display = 'block';
+                document.getElementById('subscribe-email').value = '';
+                document.getElementById('double-chance-offer').innerHTML = '🎉 Your DOUBLE CHANCE is ready! Apply code below 🎉';
+            } else {
+                alert('Please enter a valid email address');
+            }
+        });
+        
+        // Apply coupon code
+        document.getElementById('apply-coupon').addEventListener('click', function() {
+            const couponCode = document.getElementById('coupon-code').value;
+            if (couponCode.toUpperCase() === 'LUCKY2X') {
+                alert('Double chance applied! Each ticket now counts as two entries!');
+            } else {
+                alert('Invalid coupon code');
+            }
+        });
+        
+        // Paxum payment form submission
+        document.getElementById('payment-btn').addEventListener('click', function() {
+            // Set the amount based on ticket count
+            const ticketCount = parseInt(document.getElementById('ticket-count').value);
+            document.getElementById('paxum-amount').value = ticketCount * 10;
+            
+            // Submit the hidden Paxum form
+            document.getElementById('paxum-form').submit();
         });
     </script>
 </body>
