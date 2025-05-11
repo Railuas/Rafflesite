@@ -698,6 +698,28 @@
             text-align: center;
         }
         
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px 0;
+            background-color: white;
+            border-top: 1px solid #eee;
+        }
+        
+        .trust-badge {
+            height: 40px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .trust-badge:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -757,6 +779,14 @@
             
             .email-subscribe input {
                 width: 60%;
+            }
+            
+            .trust-badges {
+                gap: 10px;
+            }
+            
+            .trust-badge {
+                height: 30px;
             }
         }
     </style>
@@ -1100,6 +1130,15 @@
             </div>
         </div>
     </section>
+    
+    <div class="trust-badges">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" class="trust-badge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard" class="trust-badge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Google_Pay_%28GPay%29_Logo.svg/512px-Google_Pay_%28GPay%29_Logo.svg.png" alt="Google Pay" class="trust-badge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Apple_Pay_logo.svg/1200px-Apple_Pay_logo.svg.png" alt="Apple Pay" class="trust-badge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png" alt="PayPal" class="trust-badge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Secure-payment-logo.svg/1200px-Secure-payment-logo.svg.png" alt="Secure Payments" class="trust-badge">
+    </div>
     
     <footer>
         <div class="container">
