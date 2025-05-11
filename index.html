@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyDraw - Win $1000 Weekly!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-lg {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+        
+        .countdown {
+            background-color: var(--dark);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        
+        .countdown-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .countdown-item {
+            margin: 0 15px;
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .countdown-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .how-it-works {
+            background-color: #f1f2f6;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            counter-reset: step-counter;
+        }
+        
+        .step {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            counter-increment: step-counter;
+        }
+        
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .winners {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .winners .section-title h2 {
+            color: white;
+        }
+        
+        .winners .section-title p {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .winner-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .winner-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .winner-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .winner-info p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        .winner-amount {
+            margin-left: auto;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .raffle-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        
+        .coupon-badge {
+            display: inline-block;
+            background-color: var(--warning);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .ticket-counter {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .ticket-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .ticket-input {
+            width: 60px;
+            text-align: center;
+            margin: 0 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .payment-method {
+            width: 60px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-method img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .testimonials {
+            background-color: #f1f2f6;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--secondary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            padding-left: 40px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        .urgency-banner {
+            background-color: var(--danger);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        .double-chance {
+            background-color: var(--warning);
+            color: var(--dark);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .coupon-input {
+            display: flex;
+            margin: 20px 0;
+        }
+        
+        .coupon-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+        
+        .coupon-input button {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .countdown-content {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                margin: 10px;
+                min-width: 70px;
+            }
+            
+            .raffle-form {
+                padding: 20px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            nav.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="urgency-banner">
+        ⚡ LAST CHANCE TO ENTER THIS WEEK'S DRAW! ONLY 2 HOURS LEFT! ⚡
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-trophy"></i>
+                    LuckyDraw
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#winners">Winners</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Win $1000 Every Week For Just $10!</h1>
+                <p>Join thousands of participants in our weekly raffle draw. One lucky winner takes home $1000 every Friday at 8PM EST!</p>
+                <a href="#enter-now" class="btn btn-primary btn-lg">ENTER NOW <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="countdown">
+        <div class="container">
+            <div class="countdown-content">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">03</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">12</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">45</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">22</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Join LuckyDraw?</h2>
+                <p>Discover why thousands of people trust us for their weekly chance to win big with minimal investment.</p>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Big Payouts</h3>
+                    <p>Win $1000 every week with just a $10 entry. That's a 100x return on your investment!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Weekly Draws</h3>
+                    <p>No long waits! We hold our draws every Friday at 8PM EST, giving you frequent chances to win.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Fair</h3>
+                    <p>Our draws are conducted live and recorded to ensure complete transparency and fairness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Getting started and winning is as easy as 1-2-3!</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <h3>Purchase Your Ticket</h3>
+                    <p>Each ticket costs just $10. You can buy multiple tickets to increase your chances of winning.</p>
+                </div>
+                <div class="step">
+                    <h3>Wait for the Draw</h3>
+                    <p>Our automated system will randomly select one winner every Friday at 8PM EST.</p>
+                </div>
+                <div class="step">
+                    <h3>Claim Your Prize</h3>
+                    <p>If you're the lucky winner, we'll notify you immediately and transfer your $1000 prize within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section winners" id="winners">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recent Winners</h2>
+                <p>These lucky participants won big with just a $10 ticket!</p>
+            </div>
+            <div class="winner-card">
+                <div class="winner-avatar">JD</div>
+                <div class="winner-info">
+                    <h4>John D.</h4>
+                    <p>From Texas, USA</p>
+                </div>
+                <div class="winner-amount">$1000</div>
+            </div>
+            <div class="winner-card">
+                <div class="winner-avatar">SM</div>
+                <div class="winner-info">
+                    <h4>Sarah M.</h4>
+                    <p>From Ontario, Canada</p>
+                </div>
+                <div class="winner-amount">$1000</div>
+            </div>
+            <div class="winner-card">
+                <div class="winner-avatar">RK</div>
+                <div class="winner-info">
+                    <h4>Robert K.</h4>
+                    <p>From London, UK</p>
+                </div>
+                <div class="winner-amount">$1000</div>
+            </div>
+            <div class="winner-card">
+                <div class="winner-avatar">AL</div>
+                <div class="winner-info">
+                    <h4>Amanda L.</h4>
+                    <p>From Sydney, Australia</p>
+                </div>
+                <div class="winner-amount">$2000 <span class="coupon-badge">DOUBLE WIN!</span></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="enter-now">
+        <div class="container">
+            <div class="section-title">
+                <h2>Enter Now</h2>
+                <p>Get your tickets for this week's draw before time runs out!</p>
+            </div>
+            <div class="raffle-form">
+                <div class="double-chance">
+                    🎉 SPECIAL OFFER: Use coupon code "LUCKY2X" to DOUBLE your winning chance! 🎉
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+                </div>
+                
+                <div class="coupon-input">
+                    <input type="text" placeholder="Enter coupon code">
+                    <button>APPLY</button>
+                </div>
+                
+                <div class="ticket-counter">
+                    <button class="ticket-btn" id="decrease-ticket">-</button>
+                    <input type="text" class="ticket-input" id="ticket-count" value="1" readonly>
+                    <button class="ticket-btn" id="increase-ticket">+</button>
+                    <span style="margin-left: 15px;">Tickets ($10 each)</span>
+                </div>
+                
+                <div class="total-amount">
+                    Total: $<span id="total-amount">10</span>
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="Visa">
+                    </div>
+                    <div class="payment-method">
+                        <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" alt="Mastercard">
+                    </div>
+                    <div class="payment-method">
+                        <img src="https://cdn-icons-png.flaticon.com/512/825/825454.png" alt="PayPal">
+                    </div>
+                    <div class="payment-method">
+                        <img src="https://cdn-icons-png.flaticon.com/512/825/825483.png" alt="Apple Pay">
+                    </div>
+                    <div class="payment-method">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2504/2504883.png" alt="Google Pay">
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-lg" style="width: 100%;">
+                    PAY $10 & ENTER DRAW <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <p style="text-align: center; margin-top: 15px; font-size: 14px;">
+                    By entering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Winners Say</h2>
+                <p>Don't just take our word for it - hear from our recent winners!</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>I couldn't believe it when I got the email saying I'd won! I'd only entered with one $10 ticket on a whim. The money was in my account the next morning. I used it to pay off some credit card debt. Thank you LuckyDraw!</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J.">
+                    <div class="author-info">
+                        <h4>Sarah J.</h4>
+                        <p>Winner #245 - $1000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>I've been playing for 3 months, spending about $40 each month. This month I used the DOUBLE promo code and won $2000! The process was so smooth and the customer service team was very helpful with my questions.</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T.">
+                    <div class="author-info">
+                        <h4>Michael T.</h4>
+                        <p>Winner #251 - $2000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Got questions? We've got answers!</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How does the raffle work?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our raffle is simple: you purchase tickets for $10 each. Each ticket gives you one entry into our weekly draw. Every Friday at 8PM EST, we randomly select one winner who receives $1000. The more tickets you purchase, the higher your chances of winning.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I get paid if I win?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>If you're the lucky winner, we'll contact you immediately after the draw via email and phone. You can choose to receive your prize via bank transfer, PayPal, or other electronic payment methods. All prizes are paid within 24 hours of the draw.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is this raffle legal?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, our raffle is fully licensed and regulated. We operate in compliance with all applicable laws and regulations. Participants must be 18 years or older to enter.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What are these double chance coupons I keep seeing?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our double chance coupons are special promotions that literally double your chances of winning! When you apply a valid coupon code during checkout, each ticket you purchase counts as two entries in the draw. For example, buying one ticket with a double chance coupon gives you the same odds as buying two regular tickets.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How can I be sure the draw is fair?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We use a certified random number generator for our draws, and each draw is conducted live on our Facebook page and recorded for transparency. We also have independent auditors who verify the fairness of each draw. You can request to see the recording of any draw by contacting our support team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="raffle-form" style="max-width: 100%; text-align: center; background-color: var(--primary); color: white;">
+                <h2 style="margin-bottom: 20px; color: white;">Don't Miss Your Chance To Win!</h2>
+                <p style="margin-bottom: 30px; font-size: 18px;">Join thousands of participants in this week's $1000 draw. Remember - you can't win if you don't enter!</p>
+                <a href="#enter-now" class="btn btn-lg" style="background-color: var(--accent);">ENTER NOW <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuckyDraw</h3>
+                    <p>Your trusted weekly raffle platform where dreams come true every Friday at 8PM EST.</p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#winners">Past Winners</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Responsible Gaming</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> support@luckydraw.com</li>
+                        <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Raffle Street, Las Vegas, NV</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 LuckyDraw. All rights reserved. Must be 18+ to participate.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+        
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const nextFriday = new Date();
+            
+            // Set to next Friday 8PM
+            nextFriday.setDate(now.getDate() + (5 - now.getDay() + 7) % 7);
+            nextFriday.setHours(20, 0, 0, 0);
+            
+            // If it's already past this Friday 8PM, set to next Friday
+            if (now > nextFriday) {
+                nextFriday.setDate(nextFriday.getDate() + 7);
+            }
+            
+            const diff = nextFriday - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Ticket counter
+        const ticketCount = document.getElementById('ticket-count');
+        const totalAmount = document.getElementById('total-amount');
+        const increaseBtn = document.getElementById('increase-ticket');
+        const decreaseBtn = document.getElementById('decrease-ticket');
+        
+        increaseBtn.addEventListener('click', function() {
+            let count = parseInt(ticketCount.value);
+            count++;
+            ticketCount.value = count;
+            totalAmount.textContent = count * 10;
+        });
+        
+        decreaseBtn.addEventListener('click', function() {
+            let count = parseInt(ticketCount.value);
+            if (count > 1) {
+                count--;
+                ticketCount.value = count;
+                totalAmount.textContent = count * 10;
+            }
+        });
+        
+        // FAQ accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentNode;
+                item.classList.toggle('active');
+                
+                // Close other open items
+                faqQuestions.forEach(q => {
+                    if (q !== this) {
+                        q.parentNode.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mainNav').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
